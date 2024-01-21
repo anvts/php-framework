@@ -8,7 +8,7 @@ class PostController
 {
     public function show(int $id)
     {
-        $content = "<h1>Post #{$id}</h1>";
+        $content = "<h1>Post #$id</h1>";
         return new Response($content);
     }
 }

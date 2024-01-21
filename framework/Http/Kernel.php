@@ -3,7 +3,6 @@
 namespace Anvts\Framework\Http;
 
 use Anvts\Framework\Routing\RouterInterface;
-use Throwable;
 
 class Kernel
 {
@@ -18,7 +17,7 @@ class Kernel
         try {
             [$routeHandler, $vars] = $this->router->dispatch($request);
             $response = call_user_func_array($routeHandler, $vars);
-        } catch (Throwable $exception) {
+        } catch (\Throwable $exception) {
             $response = new Response($exception->getMessage(), statusCode: 500);
         }
 
