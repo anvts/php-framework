@@ -1,0 +1,17 @@
+{
+    "name": "anvts/php-framework",
+    "description": "Simple php framework",
+    "type": "project",
+    "authors": [
+        {
+            "name": "anvts"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app",
+            "Anvts\\Framework\\": "framework"
+        }
+    },
+    "require": {}
+}
