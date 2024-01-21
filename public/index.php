@@ -3,7 +3,11 @@
 require_once dirname(path: __DIR__) . '/vendor/autoload.php';
 
 use Anvts\Framework\Http\Request;
+use Anvts\Framework\Http\Response;
 
 $request = Request::createFromGlobals();
 
-dd($request);
+$content = '<h1>Test</h1>';
+
+$response = new Response($content);
+$response->send();
