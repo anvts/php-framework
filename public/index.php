@@ -1,5 +1,7 @@
 <?php
 
+define('BASE_PATH', dirname(path: __DIR__));
+
 require_once dirname(path: __DIR__) . '/vendor/autoload.php';
 
 use Anvts\Framework\Http\Request;
