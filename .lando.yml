@@ -1,0 +1,4 @@
+name: php-framework
+recipe: lemp
+config:
+  webroot: public
