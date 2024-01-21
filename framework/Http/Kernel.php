@@ -15,16 +15,6 @@ class Kernel
             foreach ($routes as $route) {
                 $collector->addRoute(...$route);
             }
-
-//            $collector->get( '/', function () {
-//                $content = '<h1>Root</h1>';
-//                return new Response($content);
-//            });
-//
-//            $collector->get( '/posts/{id:\d+}', function (array $vars) {
-//                $content = "<h1>Post #{$vars['id']}</h1>";
-//                return new Response($content);
-//            });
         });
 
         $routeInfo = $dispatcher->dispatch(
@@ -34,7 +24,7 @@ class Kernel
 
         [$status, [$controller, $method], $vars] = $routeInfo;
 
-        $response = (new $controller())->$method($vars);
+        $response = call_user_func_array([new $controller(), $method], $vars);
 
         return $response;
     }
