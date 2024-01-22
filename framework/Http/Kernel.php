@@ -2,6 +2,7 @@
 
 namespace Anvts\Framework\Http;
 
+use Anvts\Framework\Http\Exceptions\HttpException;
 use Anvts\Framework\Routing\RouterInterface;
 
 class Kernel
@@ -17,8 +18,10 @@ class Kernel
         try {
             [$routeHandler, $vars] = $this->router->dispatch($request);
             $response = call_user_func_array($routeHandler, $vars);
-        } catch (\Throwable $exception) {
-            $response = new Response($exception->getMessage(), statusCode: 500);
+        } catch (HttpException $e) {
+            $response = new Response($e->getMessage(), $e->getStatusCode());
+        } catch (\Throwable $e) {
+            $response = new Response($e->getMessage(), 500);
         }
 
         return $response;
