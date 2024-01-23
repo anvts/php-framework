@@ -1,0 +1,19 @@
+{
+    "name": "anvts/php-framework",
+    "description": "Simple php framework",
+    "authors": [
+        {
+            "name": "anvts"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Anvts\\Framework\\": "src"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "nikic/fast-route": "^1.3"
+    }
+}

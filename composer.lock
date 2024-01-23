@@ -4,8 +4,36 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff66e4a16d33353f67ec3958f412b8ca",
+    "content-hash": "dca770b6260ca0c3ddd48f5ce5f50d11",
     "packages": [
+        {
+            "name": "anvts/php-framework",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "framework",
+                "reference": "cd1093a2facb250fef71205f220de2334138cea1"
+            },
+            "require": {
+                "nikic/fast-route": "^1.3",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Anvts\\Framework\\": "src"
+                }
+            },
+            "authors": [
+                {
+                    "name": "anvts"
+                }
+            ],
+            "description": "Simple php framework",
+            "transport-options": {
+                "relative": true
+            }
+        },
         {
             "name": "nikic/fast-route",
             "version": "v1.3.0",
@@ -227,10 +255,14 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "anvts/php-framework": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": "^8.2"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.2.0"
 }
