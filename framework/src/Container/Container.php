@@ -22,6 +22,11 @@ class Container implements ContainerInterface
         $this->services[$id] = $service;
     }
 
+    public function has(string $id): bool
+    {
+        return isset($this->services[$id]);
+    }
+
     public function get(string $id)
     {
         if (!$this->has($id)) {
@@ -53,8 +58,19 @@ class Container implements ContainerInterface
         return $instance;
     }
 
-    public function has(string $id): bool
+    private function resolveClassDependencies(array $constructorParams): array
     {
-        return isset($this->services[$id]);
+        $classDependencies = [];
+
+        /**
+         * @var \ReflectionParameter $constructorParam
+         */
+        foreach ($constructorParams as $constructorParam) {
+            $serviceType = $constructorParam->getType();
+            $service = $this->get($serviceType->getName());
+            $classDependencies[] = $service;
+        }
+
+        return $classDependencies;
     }
 }
