@@ -21,4 +21,18 @@ class ContainerTest extends TestCase
         $this->expectException(ContainerException::class);
         $container->add('wrongServiceId');
     }
+
+    public function testContainerHasService()
+    {
+        $container = new Container();
+        $container->add('serviceId', ServiceTestClass::class);
+        $this->assertTrue($container->has('serviceId'));
+    }
+
+    public function testContainerHasNotService()
+    {
+        $container = new Container();
+        $container->add('serviceId', ServiceTestClass::class);
+        $this->assertFalse($container->has('wrongServiceId'));
+    }
 }
