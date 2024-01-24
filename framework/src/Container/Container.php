@@ -24,6 +24,13 @@ class Container implements ContainerInterface
 
     public function get(string $id)
     {
+        if (!$this->has($id)) {
+            if (!class_exists($id)) {
+                throw new ContainerException("Service $id couldn't be resolved");
+            }
+
+            $this->add($id);
+        }
         return new $this->services[$id];
     }
 
