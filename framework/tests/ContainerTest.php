@@ -11,8 +11,8 @@ class ContainerTest extends TestCase
     public function testGetServiceFromContainer()
     {
         $container = new Container();
-        $container->add('serviceId', ServiceTestClass::class);
-        $this->assertInstanceOf(ServiceTestClass::class, $container->get('serviceId'));
+        $container->add('ServiceMock1', ServiceMock1::class);
+        $this->assertInstanceOf(ServiceMock1::class, $container->get('ServiceMock1'));
     }
 
     public function testAddServiceByWrongId()
@@ -25,14 +25,27 @@ class ContainerTest extends TestCase
     public function testContainerHasService()
     {
         $container = new Container();
-        $container->add('serviceId', ServiceTestClass::class);
-        $this->assertTrue($container->has('serviceId'));
+        $container->add('ServiceMock1', ServiceMock1::class);
+        $this->assertTrue($container->has('ServiceMock1'));
     }
 
     public function testContainerHasNotService()
     {
         $container = new Container();
-        $container->add('serviceId', ServiceTestClass::class);
+        $container->add('ServiceMock1', ServiceMock1::class);
         $this->assertFalse($container->has('wrongServiceId'));
+    }
+
+    public function testAutoWiring()
+    {
+        $container = new Container();
+        $container->add('ServiceMock1', ServiceMock1::class);
+
+        /**
+         * @var ServiceMock1 $serviceMock1
+         */
+        $serviceMock1 = $container->get('ServiceMock1');
+
+        $this->assertInstanceOf(\ServiceMock2::class, $serviceMock1->getServiceMock2());
     }
 }
