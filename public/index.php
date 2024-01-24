@@ -2,18 +2,20 @@
 
 define('BASE_PATH', dirname(path: __DIR__));
 
-require_once dirname(path: __DIR__) . '/vendor/autoload.php';
+require_once BASE_PATH . '/vendor/autoload.php';
 
-use Anvts\Framework\Http\Kernel;
 use Anvts\Framework\Http\Request;
-use Anvts\Framework\Routing\Router;
+use Anvts\Framework\Http\Kernel;
+use League\Container\Container;
 
+/**
+ * @var Container $container
+ */
 $container = require BASE_PATH . '/config/services.php';
 
 $request = Request::createFromGlobals();
 
-$router = new Router();
-$kernel = new Kernel($router);
+$kernel = $container->get(Kernel::class);
 
 $response = $kernel->handle($request);
 $response->send();
