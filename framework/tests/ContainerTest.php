@@ -36,7 +36,7 @@ class ContainerTest extends TestCase
         $this->assertFalse($container->has('wrongServiceId'));
     }
 
-    public function testAutoWiring()
+    public function testContainerAutoWiring()
     {
         $container = new Container();
         $container->add('ServiceMock1', ServiceMock1::class);

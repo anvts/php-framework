@@ -31,7 +31,26 @@ class Container implements ContainerInterface
 
             $this->add($id);
         }
-        return new $this->services[$id];
+
+        $instance = $this->resolve($this->services[$id]);
+
+        return $instance;
+    }
+
+    private function resolve($class)
+    {
+        $reflectionClass = new \ReflectionClass($class);
+        $constructor = $reflectionClass->getConstructor();
+
+        if (is_null($constructor)) {
+            return $reflectionClass->newInstance();
+        }
+
+        $constructorParams = $constructor->getParameters();
+        $classDependencies = $this->resolveClassDependencies($constructorParams);
+        $instance = $reflectionClass->newInstanceArgs($classDependencies);
+
+        return $instance;
     }
 
     public function has(string $id): bool
