@@ -12,11 +12,6 @@
             "Anvts\\Framework\\": "src"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Anvts\\Framework\\Tests\\": "tests"
-        }
-    },
     "require": {
         "php": "^8.2",
         "nikic/fast-route": "^1.3",
