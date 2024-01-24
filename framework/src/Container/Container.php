@@ -29,7 +29,6 @@ class Container implements ContainerInterface
 
     public function has(string $id): bool
     {
-        // TODO: Implement has() method.
-        return true;
+        return isset($this->services[$id]);
     }
 }
