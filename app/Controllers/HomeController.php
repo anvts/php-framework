@@ -4,11 +4,13 @@ namespace App\Controllers;
 
 use Anvts\Framework\Http\Response;
 use App\Services\TestService;
+use Twig\Environment;
 
 class HomeController
 {
     public function __construct(
-        private readonly TestService $testService
+        private readonly TestService $testService,
+        private readonly Environment $twig
     )
     {
     }
