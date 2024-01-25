@@ -17,7 +17,9 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         $content = "<h1>Home</h1><br><a href='/posts/1'>Go to /posts/1</a>";
-        $content .= "<br><br><a href='{$this->testService->getTestUrl()}'>Link from test service</a>";
-        return new Response($content);
+        $content .= '<br><br><a href="{{ testUrl }}">Link from test service</a>';
+        return $this->render($content, [
+            'testUrl' => $this->testService->getTestUrl()
+        ]);
     }
 }
