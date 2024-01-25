@@ -8,7 +8,7 @@ class PostController
 {
     public function show(int $id): Response
     {
-        $content = "<h1>Post #$id</h1>";
+        $content = "<h1>Post #$id</h1><br><a href='/'>Go to /</a>";
         return new Response($content);
     }
 }
