@@ -20,5 +20,8 @@
     "require": {
         "php": "^8.2",
         "anvts/php-framework": "dev-master"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^7.0.2"
     }
 }
