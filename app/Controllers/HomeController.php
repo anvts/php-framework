@@ -2,15 +2,14 @@
 
 namespace App\Controllers;
 
+use Anvts\Framework\Controller\AbstractController;
 use Anvts\Framework\Http\Response;
 use App\Services\TestService;
-use Twig\Environment;
 
-class HomeController
+class HomeController extends AbstractController
 {
     public function __construct(
         private readonly TestService $testService,
-        private readonly Environment $twig
     )
     {
     }
