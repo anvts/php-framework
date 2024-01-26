@@ -7,10 +7,12 @@ use League\Container\ReflectionContainer;
 use Symfony\Component\Dotenv\Dotenv;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
+use Doctrine\DBAL\Connection;
 use Anvts\Framework\Http\Kernel;
 use Anvts\Framework\Routing\RouterInterface;
 use Anvts\Framework\Routing\Router;
 use Anvts\Framework\Controller\AbstractController;
+use Anvts\Framework\Dbal\ConnectionFactory;
 
 $dotenv = new Dotenv();
 $dotenv->load(BASE_PATH . '/.env');
@@ -20,6 +22,7 @@ $dotenv->load(BASE_PATH . '/.env');
 $appEnv = $_ENV['APP_ENV'] ?? 'local';
 $routes = include BASE_PATH . '/routes/web.php';
 $viewsPath = BASE_PATH . '/views';
+$databaseUrl = 'pdo-mysql://lemp:lemp@database:3306/lemp?charset=utf8mb4';
 
 // Application services
 
@@ -45,5 +48,12 @@ $container->addShared('twig', Environment::class)
 
 $container->inflector(AbstractController::class)
     ->invokeMethod('setContainer', [$container]);
+
+$container->add(ConnectionFactory::class)
+    ->addArgument(new StringArgument($databaseUrl));
+
+$container->addShared(Connection::class, function () use ($container): Connection {
+    return $container->get(ConnectionFactory::class)->create();
+});
 
 return $container;
