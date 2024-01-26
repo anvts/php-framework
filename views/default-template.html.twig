@@ -9,8 +9,63 @@
 </head>
 <body>
 <main class="main">
-    {% block main %}
-    {% endblock %}
+    <nav class="navigation">
+        <ul class="navigation-item-list">
+            <li>
+                <a href="/" class="home-link">Home</a>
+            </li>
+            <li> | </li>
+            <li>
+                <a href="/posts/create">Create post</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="content">
+        {% block main %}
+        {% endblock %}
+    </div>
 </main>
 </body>
 </html>
+
+<style>
+    body {
+        font-family: 'Microsoft Sans Serif', sans-serif;
+        margin: 0;
+        padding: 0;
+        color: black;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    a.home-link {
+        font-weight: 600;
+    }
+
+    nav.navigation {
+        display: flex;
+        padding: 12px 16px;
+        background-color: #e6e7ea;
+    }
+
+    ul.navigation-item-list {
+        display: flex;
+        gap: 16px;
+    }
+
+    div.content {
+        padding: 12px 16px
+    }
+</style>
+
+{% block style %}
+
+{% endblock %}

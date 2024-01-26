@@ -1,0 +1,44 @@
+{% extends 'default-template.html.twig' %}
+
+{% block main %}
+<h1>Create post</h1>
+<form action="" class="create-post-form">
+    <ul class="form-item-list">
+       <li class="form-item">
+           <label for="name">Enter post name: </label>
+           <input type="text" name="name" id="name" required />
+       </li>
+       <li class="form-item">
+           <label for="content">Enter post content: </label>
+           <textarea name="content" id="content" cols="30" rows="10"></textarea>
+       </li>
+       <li class="form-item">
+           <input type="submit" value="Create" class="create-post-submit-btn" />
+       </li>
+    </ul>
+</form>
+{% endblock %}
+
+{% block style %}
+<style>
+    form.create-post-form {
+        width: 30%;
+    }
+
+    ul.form-item-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    li.form-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    input.create-post-submit-btn {
+        cursor: pointer;
+    }
+</style>
+{% endblock %}
