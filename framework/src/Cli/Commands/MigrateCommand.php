@@ -37,12 +37,19 @@ class MigrateCommand implements CommandInterface
                 $this->addMigrationToDb($migration);
             }
 
+            $sqlArray = $schema->toSql($this->connection->getDatabasePlatform());
+
+            foreach ($sqlArray as $sql) {
+                $this->connection->executeQuery($sql);
+            }
+
             $this->connection->commit();
         } catch (\Throwable $e) {
             $this->connection->rollBack();
             throw $e;
         }
 
+        echo 'Migrations are successfully complete';
         return 0;
     }
 

@@ -24,6 +24,6 @@ return new class
 
     public function down(Schema $schema): void
     {
-        echo get_class($this) . ' method down' . PHP_EOL;
+        // TODO: Implement down method
     }
 };
