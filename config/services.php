@@ -15,6 +15,8 @@ use Anvts\Framework\Controller\AbstractController;
 use Anvts\Framework\Dbal\ConnectionFactory;
 use Anvts\Framework\Cli\Kernel as CliKernel;
 use Anvts\Framework\Cli\Application;
+use Anvts\Framework\Cli\Commands\MigrateCommand;
+
 
 $dotenv = new Dotenv();
 $dotenv->load(BASE_PATH . '/.env');
@@ -66,5 +68,8 @@ $container->add(CliKernel::class)
 
 $container->add(Application::class)
     ->addArgument($container);
+
+$container->add('cli:migrate', MigrateCommand::class)
+    ->addArgument(Connection::class);
 
 return $container;
