@@ -64,4 +64,7 @@ $container->add(CliKernel::class)
     ->addArgument($container)
     ->addArgument(Application::class);
 
+$container->add(Application::class)
+    ->addArgument($container);
+
 return $container;
