@@ -2,6 +2,7 @@
 
 namespace Anvts\Framework\Routing;
 
+use Anvts\Framework\Controller\AbstractController;
 use Anvts\Framework\Http\Exceptions\MethodNotAllowedException;
 use Anvts\Framework\Http\Exceptions\RouteNotFoundException;
 use Anvts\Framework\Http\Request;
@@ -21,6 +22,11 @@ class Router implements RouterInterface
         if (is_array($handler)) {
             [$controllerId, $method] = $handler;
             $controller = $container->get($controllerId);
+
+            if (is_subclass_of($controller, AbstractController::class)) {
+                $controller->setRequest($request);
+            }
+
             $handler = [$controller, $method];
         }
 

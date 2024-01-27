@@ -21,6 +21,6 @@ class PostController extends AbstractController
 
     public function store(): Response
     {
-        dd('Ok');
+        dd($this->request);
     }
 }
