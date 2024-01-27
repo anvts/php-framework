@@ -14,6 +14,7 @@ use Anvts\Framework\Routing\Router;
 use Anvts\Framework\Controller\AbstractController;
 use Anvts\Framework\Dbal\ConnectionFactory;
 use Anvts\Framework\Cli\Kernel as CliKernel;
+use Anvts\Framework\Cli\Application;
 
 $dotenv = new Dotenv();
 $dotenv->load(BASE_PATH . '/.env');
@@ -59,6 +60,8 @@ $container->addShared(Connection::class, function () use ($container): Connectio
     return $container->get(ConnectionFactory::class)->create();
 });
 
-$container->add(CliKernel::class)->addArgument($container);
+$container->add(CliKernel::class)
+    ->addArgument($container)
+    ->addArgument(Application::class);
 
 return $container;
