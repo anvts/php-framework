@@ -20,7 +20,19 @@ class MigrateCommand implements CommandInterface
 
     public function execute(array $args = []): int
     {
-        $this->createMigrationsTable();
+        try {
+            $this->createMigrationsTable();
+            $this->connection->beginTransaction();
+
+            $appliedMigrations = $this->getAppliedMigrations();
+            dd($appliedMigrations);
+
+            $this->connection->commit();
+        } catch (\Throwable $e) {
+            $this->connection->rollBack();
+            throw $e;
+        }
+
         return 0;
     }
 
@@ -48,5 +60,16 @@ class MigrateCommand implements CommandInterface
 
             echo 'Migrations table created' . PHP_EOL;
         }
+    }
+
+    private function getAppliedMigrations(): array
+    {
+        $queryBuilder = $this->connection->createQueryBuilder();
+
+        return $queryBuilder
+            ->select('migration')
+            ->from(self::MIGRATIONS_TABLE_NAME)
+            ->executeQuery()
+            ->fetchFirstColumn();
     }
 }
