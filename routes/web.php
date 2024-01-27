@@ -1,6 +1,5 @@
 <?php
 
-use Anvts\Framework\Http\Response;
 use Anvts\Framework\Routing\Route;
 use App\Controllers\HomeController;
 use App\Controllers\PostController;
