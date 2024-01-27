@@ -18,4 +18,9 @@ class PostController extends AbstractController
     {
         return $this->render('create-post.html.twig');
     }
+
+    public function store(): Response
+    {
+        dd('Ok');
+    }
 }

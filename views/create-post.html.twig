@@ -2,7 +2,7 @@
 
 {% block main %}
 <h1>Create post</h1>
-<form action="" class="create-post-form">
+<form action="/posts" method="post" class="create-post-form">
     <ul class="form-item-list">
        <li class="form-item">
            <label for="name">Enter post name: </label>
@@ -10,7 +10,7 @@
        </li>
        <li class="form-item">
            <label for="content">Enter post content: </label>
-           <textarea name="content" id="content" cols="30" rows="10"></textarea>
+           <textarea name="content" id="content" cols="30" rows="10" required></textarea>
        </li>
        <li class="form-item">
            <input type="submit" value="Create" class="create-post-submit-btn" />
