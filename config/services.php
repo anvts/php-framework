@@ -13,6 +13,7 @@ use Anvts\Framework\Routing\RouterInterface;
 use Anvts\Framework\Routing\Router;
 use Anvts\Framework\Controller\AbstractController;
 use Anvts\Framework\Dbal\ConnectionFactory;
+use Anvts\Framework\Cli\Kernel as CliKernel;
 
 $dotenv = new Dotenv();
 $dotenv->load(BASE_PATH . '/.env');
@@ -31,6 +32,8 @@ $container = new Container();
 $container->delegate(new ReflectionContainer(true));
 
 $container->add('APP_ENV', new StringArgument($appEnv));
+
+$container->add('framework-cli-commands-namespace', new StringArgument('Anvts\\Framework\\Cli\\Commands\\'));
 
 $container->add(RouterInterface::class, Router::class);
 $container->extend(RouterInterface::class)
@@ -55,5 +58,7 @@ $container->add(ConnectionFactory::class)
 $container->addShared(Connection::class, function () use ($container): Connection {
     return $container->get(ConnectionFactory::class)->create();
 });
+
+$container->add(CliKernel::class)->addArgument($container);
 
 return $container;
