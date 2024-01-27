@@ -70,6 +70,7 @@ $container->add(Application::class)
     ->addArgument($container);
 
 $container->add('cli:migrate', MigrateCommand::class)
-    ->addArgument(Connection::class);
+    ->addArgument(Connection::class)
+    ->addArgument(new StringArgument(BASE_PATH . '/database/migrations'));
 
 return $container;
