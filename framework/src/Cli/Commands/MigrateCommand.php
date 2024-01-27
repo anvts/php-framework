@@ -34,7 +34,7 @@ class MigrateCommand implements CommandInterface
             foreach ($migrationsToApply as $migration) {
                 $migrationInstance = require $this->migrationFilesPath . "/$migration";
                 $migrationInstance->up($schema);
-                $this->addMigrationToDb();
+                $this->addMigrationToDb($migration);
             }
 
             $this->connection->commit();
