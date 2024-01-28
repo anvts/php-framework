@@ -5,8 +5,6 @@ use League\Container\Argument\Literal\ArrayArgument;
 use League\Container\Argument\Literal\StringArgument;
 use League\Container\ReflectionContainer;
 use Symfony\Component\Dotenv\Dotenv;
-use Twig\Loader\FilesystemLoader;
-use Twig\Environment;
 use Doctrine\DBAL\Connection;
 use Anvts\Framework\Http\Kernel;
 use Anvts\Framework\Routing\RouterInterface;
@@ -16,7 +14,9 @@ use Anvts\Framework\Dbal\ConnectionFactory;
 use Anvts\Framework\Cli\Kernel as CliKernel;
 use Anvts\Framework\Cli\Application;
 use Anvts\Framework\Cli\Commands\MigrateCommand;
-
+use Anvts\Framework\Template\TwigFactory;
+use Anvts\Framework\Session\SessionInterface;
+use Anvts\Framework\Session\Session;
 
 $dotenv = new Dotenv();
 $dotenv->load(BASE_PATH . '/.env');
@@ -46,11 +46,15 @@ $container->add(Kernel::class)
     ->addArgument(RouterInterface::class)
     ->addArgument($container);
 
-$container->addShared('twig-loader', FilesystemLoader::class)
-    ->addArgument(new StringArgument($viewsPath));
+$container->addShared(SessionInterface::class, Session::class);
 
-$container->addShared('twig', Environment::class)
-    ->addArgument('twig-loader');
+$container->add('twig-factory', TwigFactory::class)
+    ->addArgument(new StringArgument($viewsPath))
+    ->addArgument(SessionInterface::class);
+
+$container->addShared('twig', function () use ($container) {
+    return $container->get('twig-factory')->create();
+});
 
 $container->inflector(AbstractController::class)
     ->invokeMethod('setContainer', [$container]);
