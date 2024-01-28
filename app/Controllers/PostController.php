@@ -18,8 +18,15 @@ class PostController extends AbstractController
 
     public function show(int $id): Response
     {
+        $post = $this->postService->find($id);
+
+        if (!$post) {
+            return $this->render('post-not-found.html.twig');
+        }
+
         return $this->render('posts.html.twig', [
-            'postId' => $id
+            'post' => $post,
+            'createdAt' => $post->getCreatedAt()->format('Y-m-d H:i:s')
         ]);
     }
 

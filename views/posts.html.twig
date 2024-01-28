@@ -1,8 +1,39 @@
 {% extends 'default-template.html.twig' %}
 
 {% block main %}
-<h1>Posts | post #{{ postId }}</h1>
-<p>
-    <a href='/'>Go to "/"</a>
-</p>
+<h1>Posts | #{{ post.id }}</h1>
+    <div class="post-container">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <p class="post-content">{{ post.content }}</p>
+        <span class="post-date">{{ createdAt }}</span>
+    </div>
+{% endblock %}
+
+{% block style %}
+    <style>
+        div.post-container {
+            width: 30%;
+            padding: 12px 24px;
+            border: 1px solid rgba(14, 14, 36, 0.31);
+            border-radius: 4px;
+        }
+
+        h2.post-title {
+            margin: 0;
+            padding-bottom: 4px;
+            font-size: 20px;
+            border-bottom: 1px solid rgba(14, 14, 36, 0.31);
+        }
+
+        p.post-content {
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        span.post-date {
+            display: block;
+            font-size: 12px;
+            text-align: end;
+        }
+    </style>
 {% endblock %}
