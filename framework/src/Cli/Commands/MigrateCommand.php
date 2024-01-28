@@ -22,6 +22,8 @@ class MigrateCommand implements CommandInterface
     public function execute(array $args = []): int
     {
         try {
+            $this->connection->setAutoCommit(false);
+
             $this->createMigrationsTable();
             $this->connection->beginTransaction();
 
@@ -50,6 +52,8 @@ class MigrateCommand implements CommandInterface
         }
 
         echo 'Migrations are successfully complete';
+        $this->connection->setAutoCommit(true);
+
         return 0;
     }
 
