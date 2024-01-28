@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Anvts\Framework\Controller\AbstractController;
 use Anvts\Framework\Http\Response;
+use App\Entities\Post;
 
 class PostController extends AbstractController
 {
@@ -21,6 +22,10 @@ class PostController extends AbstractController
 
     public function store(): Response
     {
-        dd($this->request);
+        $post = Post::create(
+            $this->request->getPostData()['title'],
+            $this->request->getPostData()['content']
+        );
+        dd($post);
     }
 }
