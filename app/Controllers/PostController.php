@@ -5,9 +5,17 @@ namespace App\Controllers;
 use Anvts\Framework\Controller\AbstractController;
 use Anvts\Framework\Http\Response;
 use App\Entities\Post;
+use App\Services\PostService;
 
 class PostController extends AbstractController
 {
+    public function __construct(
+        private PostService $postService
+    )
+    {
+
+    }
+
     public function show(int $id): Response
     {
         return $this->render('posts.html.twig', [
@@ -26,6 +34,9 @@ class PostController extends AbstractController
             $this->request->getPostData()['title'],
             $this->request->getPostData()['content']
         );
+
+        $post = $this->postService->save($post);
+
         dd($post);
     }
 }
