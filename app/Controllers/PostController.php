@@ -18,10 +18,12 @@ class PostController extends AbstractController
 
     public function show(int $id): Response
     {
-        $post = $this->postService->find($id);
-
-        if (!$post) {
-            return $this->render('post-not-found.html.twig');
+        try {
+            $post = $this->postService->findOrFail($id);
+        } catch (\Exception $e) {
+            return $this->render('post-not-found.html.twig', [
+                'message' => $e->getMessage(),
+            ]);
         }
 
         return $this->render('posts.html.twig', [
