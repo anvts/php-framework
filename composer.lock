@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "framework",
-                "reference": "33d46a176bb758769799a4cea98c17cee0911da9"
+                "reference": "909783a5a5d6224289086da4e8ba2d6ef4027757"
             },
             "require": {
                 "doctrine/dbal": "^3.8.0",
@@ -23,6 +23,7 @@
                 "twig/twig": "^3.8.0"
             },
             "require-dev": {
+                "phpunit/phpunit": "^10.5.9",
                 "symfony/var-dumper": "^7.0.2"
             },
             "type": "library",
